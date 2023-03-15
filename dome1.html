@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>生成二维码</title>
+		<style type="text/css">
+			#output{
+				position: relative;
+			}
+			#imgs{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="output">
+			<!-- <canvas width="256" height="256"></canvas> -->
+		</div>
+
+		<script src="js/jquery.js" type="text/javascript"></script>
+		<script src="js/html2canvas.js" type="text/javascript"></script>
+		<!-- 生成二维码sdk -->
+		<script src="js/jquery.qrcode.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			// 生成二维码方法调用
+			$(function(){
+				const url="https://www.baidu.com"
+				
+				// 直接传参数，二维码简洁  
+				$('#output').qrcode(url);
+				
+				// 二维码详细设置
+				$('#output').qrcode({
+					// 生成方式（table/canvas）  (默认canvas方式)
+					render: "canvas",
+					// 指定生成二维码的大小
+					width: 160,
+					height: 160,
+					// 指定生成二维码的色彩样式：
+					foreground: "#C00",
+					background: "#FFF",
+					text: url
+				});
+				
+				// 中文ULR生成方法:
+				$("#output").qrcode(encodeURI("http://中文中文中文中文"));//使用encodeURI进行转码
+				
+				
+				html2canvas($("#output")).then(function(canvas) {
+					var imgUri = canvas.toDataURL("image/png") // 获取生成的图片的url
+					// console.log(imgUri);
+					$("#output").append('<img id="imgs" src="" alt="" />')
+					$("#imgs").css({"position" : "absolute", "top" : "0", "left" : "0"})
+					$("#imgs").attr('src',imgUri);   //imgUri生成的base64码
+				});
+				
+			})
+		</script>
+
+	</body>
+</html>
