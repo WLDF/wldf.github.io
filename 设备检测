@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="gbk">
+    <!--IE=edge告诉IE使用最新的引擎渲染网页，chrome=1则可以激活Chrome Frame-->
+    <meta http-equiv="x-ua-compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=0,maximum-scale=5,user-scalable=no,maximum-scale=1,divport-fit=cover" />
+    <!--<meta name="viewport" content="width=750,minimum-scale=0,maximum-scale=5,user-scalable=no">-->
+
+    <meta name="format-detection" content="telephone=no" />
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta name="author" content="Design:CP; Web Layout:CP;" />
+    <meta name="robots" content="all" />
+    <meta name="referrer" content="unsafe-url">
+    <meta name="Description" content="动作游戏、动作新游、王者荣耀首款英雄动作新游" />
+    <meta name="Keywords" content="王者新游、动作英雄手游、王者荣耀首款英雄动作新游、星之破晓" />
+    <title>星之破晓</title>
+    <!--图片分离地址：//game.gtimg.cn/images/wedo/cp/wedo20240703/-->
+    <link rel="stylesheet" href="//game.gtimg.cn/images/wedo/cp/wedo20240703/index.css">
+    <!-- swiper 4.3.3 css -->
+    <link rel="stylesheet" href="//ossweb-img.qq.com/images/js/swiper/swiper-4.3.3.min.css">
+    <script src="//ossweb-img.qq.com/images/js/jquery/jquery-1.11.3.min.js"></script>
+
+</head>
+
+<!-- is_android is_wx -->
+
+<body class="is_wx">
+    <!-- *** 按钮状态：
+        /* 按钮已领取: .got */
+        /* 按钮置灰: .disabled */
+    -->
+    <!-- rem 适配 Start -->
+    <script>
+        ; (function () {
+            var html = document.documentElement;
+            var body = document.body;
+            var d = document.createElement('div');
+            d.style.cssText = "width:1rem; overflow: hidden;position:absolute;z-index:-1;visibility: hidden;";
+            body.appendChild(d);
+            var dw = d.offsetWidth; // 1rem表示的实际字号（大部分标准字号是16px）
+            var fz = 100; //正常计算出来的rem基准值 , 可自行修改为rem计算好的值
+            body.removeChild(d);
+            var k = document.getElementById('screenFix') ? document.getElementById('screenFix').getAttribute('data-size') : 640;
+            function setFont() {
+                var realRem = fz;
+                if (dw != fz) {//不相等 则被缩放了
+                    realRem = fz * (fz / dw)
+                }
+                html.style.fontSize = html.clientWidth / k * realRem + "px";
+            }
+            setFont();
+            document.addEventListener('DOMContentLoaded', setFont, false);
+            window.addEventListener('resize', setFont, false);
+            window.addEventListener('load', setFont, false);
+
+            var isLand = window.orientation === undefined ? $(window).width() > $(window).height() : (window.orientation === 90 || window.orientation === -90);
+            var isEditing = document.activeElement.tagName === 'INPUT';
+            if (isLand && isEditing) $('input').blur();
+        }());
+    </script>
+    <!-- rem 适配 End -->
+    <script id="orientationTip" src="./js/orientation.js" data-mode="horizon"
+        title="mode values:landscape|horizon"></script>
+    <h1 class="hide">集合准备金泉 4vs45争夺第一</h1>
+    <div id="main">
+        <div class="top">
+            <ul>
+                <li>星之破晓</li>
+                <li>深圳市腾讯计算机系统有限公司</li>
+                <li class="yy_ver">应用版本：1.210.105.0</li>
+                <li>
+                    <a class="pushGameUrl ys_link" href="https://game.qq.com/privacy_guide.shtml">隐私</a>
+                    <a class="pushGameUrl qx_link"
+                        href="https://cftweb.3g.qq.com/privacy/permissions?appid=54281817">权限</a>
+                    <a class="pushGameUrl yy_link"
+                        href="https://game.weixin.qq.com/cgi-bin/h5/static/circlecenter/mixed_circle.html?tabid=7&appid=wx41b4f1ab5d710dd0&ssid=46#wechat_redirect">功能</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="page-wrap">
+            <div class="page page_index">
+                <div class="head">
+                    <a href="javascript:;" class="logo pa bg t">星之破晓</a>
+                    <a href="javascript:;" class="logo_plat logo_qq pa bg t">手Q专属</a>
+                    <a href="javascript:;" class="logo_plat logo_wx pa bg t">微信专属</a>
+                    <div class="loginfo">
+                        <div id="login" class="loginfo-wrap">
+                            <!--<span id="unlogin" class="loginfo-box">你好，请<a href="javascript:common.login();">【登录】</a></span>-->
+                            <span id="logined" class="loginfo-box" style="display: block">
+                                <span class="user_name"></span>
+                                <!--<a id="unBind" href="javascript:TGDialogS('popBind');"  title="切换角色">【绑定王者角色】</a>-->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="btn_main_wrap">
+                        <a href="javascript:;" ontouchend="easReport('wedo.wedo20240703.reserve.click')"
+                            class="btn_main btn_reserve bg t" style="display: block">立即预约</a>
+                    </div>
+                    <div class="tit_desc">预约游戏和填手机号订阅通知共可获得2次抽奖机会</div>
+                </div>
+                <div class="page-con">
+                    <div class="pt pt01 ">
+                        <h2 class="tit tit1 bg t">组队绑定领奖场</h2>
+                        <p class="tit_desc  qq_show">荣耀水晶、传说皮肤卡将以等价Q币形式发放</p>
+                        <p class="tit_desc  wx_show">荣耀水晶、传说皮肤卡将以等价红包卡券形式发放</p>
+                        <div class="img_wrap">
+                            <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/dj1_qq.png" alt=""
+                                class="qq_show img">
+                            <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/dj1_wx.png" alt=""
+                                class="wx_show img">
+                            <a href="javascript:;" ontouchend="easReport('wedo.wedo20240703.record.click')"
+                                class="btn_link btn_record">中奖记录</a>
+                        </div>
+                        <a href="javascript:;" ontouchend="easReport('wedo.wedo20240703.lott.click')"
+                            class=" btn_lott bg t">立即抽奖</a>
+                        <div class="tit_desc">预约游戏和填手机号订阅通知均可获得一次抽奖机会</div>
+                    </div>
+
+                    <div class="pt pt02 ">
+                        <h2 class="tit tit2 bg t">组队绑定领奖场</h2>
+                        <ul class="g_list">
+                            <li class="g_box">
+                                <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/g1.png" alt="">
+                                <div class="g_name">钻石×100</div>
+                            </li>
+                            <li class="g_box">
+                                <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/g2.png" alt="">
+                                <div class="g_name">星币×500</div>
+                            </li>
+                            <li class="g_box">
+                                <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/g3.png" alt="">
+                                <div class="g_name">表情×1</div>
+                            </li>
+                        </ul>
+                        <a href="javascript:;" ontouchend="easReport('wedo.wedo20240703.play.click')"
+                            class=" btn_play bg t">点击试玩</a>
+                        <div class="tit_desc">预约游戏和填手机号订阅通知均可获得一次抽奖机会</div>
+                    </div>
+
+                    <div class="pt pt03 ">
+                        <h2 class="tit tit3 bg t">组队绑定领奖场</h2>
+                        <div class="vid_list">
+                            <div class="vid_box">
+                                <div class="vid_img">
+                                    <div class="vid_mask"><img
+                                            src="//game.gtimg.cn/images/wedo/cp/wedo20240703/gif1.gif" alt=""></div>
+                                    <div class="vid_bor"></div>
+                                </div>
+                                <div class="vid_name"><img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/n1.png"
+                                        alt=""></div>
+                            </div>
+                            <div class="vid_box">
+                                <div class="vid_img">
+                                    <div class="vid_mask"><img
+                                            src="//game.gtimg.cn/images/wedo/cp/wedo20240703/gif2.gif" alt=""></div>
+                                    <div class="vid_bor"></div>
+                                </div>
+                                <div class="vid_name"><img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/n2.png"
+                                        alt=""></div>
+                            </div>
+                            <div class="vid_box">
+                                <div class="vid_img">
+                                    <div class="vid_mask"><img
+                                            src="//game.gtimg.cn/images/wedo/cp/wedo20240703/gif3.gif" alt=""></div>
+                                    <div class="vid_bor"></div>
+                                </div>
+                                <div class="vid_name"><img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/n3.png"
+                                        alt=""></div>
+                            </div>
+                            <div class="vid_box">
+                                <div class="vid_img">
+                                    <div class="vid_mask"><img
+                                            src="//game.gtimg.cn/images/wedo/cp/wedo20240703/gif4.gif" alt=""></div>
+                                    <div class="vid_bor"></div>
+                                </div>
+                                <div class="vid_name"><img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/n4.png"
+                                        alt=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt pt04 ">
+                        <h2 class="tit tit4 bg t">组队绑定领奖场</h2>
+                        <div class="vid_poster bg"><a href="javascript:popVideo('x3554daldys');"
+                                ontouchend="easReport('wedo.wedo20240703.video.click')" class="btn_video bg t"></a>
+                        </div>
+                    </div>
+
+
+                    <div class="pt pt05">
+                        <h2 class="tit tit5 bg t">组队绑定领奖场</h2>
+                        <div class="tit_desc">加入玩家聚集地了解最新资讯</div>
+                        <div class="qq_show">
+                            <div class="contact_list">
+                                <a class="contact_item"
+                                    href="https://h5.qzone.qq.com/v2/wezone/jump?_wv=3&encrypt=1&schema=CgASwwFtcXFhcGk6Ly9xY2lyY2xlL29wZW5tYWlucGFnZT9mcm9tPTEmc2hhcmVjYXRlZ29yeT0xJnNoYXJlZW50cmFuY2U9MyZ1aW49MTkxNjQ2MzY0OSZ4c2pfZnJvbV91aW49MjczMjAwMTAzJnhzal9tYWluX2VudHJhbmNlPXdlY2hhdCZ4c2pfc2hhcmVfY29udGVudF9ob3N0PTE5MTY0NjM2NDkmeHNqX3N1Yl9lbnRyYW5jZT1wcm9maWxlX3BhZ2UYAA&sharecategory=1">
+                                    <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/sq1_qq.png" alt="">
+                                    <span class="contact_name">QQ短视频</span>
+                                </a>
+                                <a class="contact_item"
+                                    href="https://youxi.gamecenter.qq.com/ogame/sgame-join-qgroup/index.html?appid=1108233464&open_mode=view_external">
+                                    <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/sq2_qq.png" alt="">
+                                    <span class="contact_name">玩家群</span>
+                                </a>
+                                <a class="contact_item" href="https://pd.qq.com/s/8gow0y2id">
+                                    <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/sq3_qq.png" alt="">
+                                    <span class="contact_name">频道</span>
+                                </a>
+                                <a class="contact_item"
+                                    href="https://m.q.qq.com/a/p/1112181893?s=query%3Dhttps%253A%252F%252Fyouxi.gamecenter.qq.com%252Fogame%252Fhippy%252Fnew-home.html%253Fappid%253D1108233464%2526appType%253D0%2526previewAppid%253D1108233464">
+                                    <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/sq4_qq.png" alt="">
+                                    <span class="contact_name">攻略站</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="wx_show">
+                            <ul class="contact_list">
+                                <a class="contact_item"
+                                    href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=Mzg4OTUyNDg5NQ==&scene=124#wechat_redirect">
+                                    <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/sq1_wx.png" alt="">
+                                    <span class="contact_name">公众号</span>
+                                </a>
+                                <a class="contact_item"
+                                    href="https://game.weixin.qq.com/cgi-bin/h5/static/circlecenter/tpjump.html?not_in_game_luggage=1&jump=wevideo%3A%2F%2Fprofile%3Ffinderusername%3Dv2_060000231003b20faec8c6ea8e1bcad1c80cea30b077201723326d60238443b676c4e96b1df3%2540finder#wechat_redirect">
+                                    <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/sq2_wx.png" alt="">
+                                    <span class="contact_name">视频号</span>
+                                </a>
+                                <a class="contact_item"
+                                    href="https://bgw.xinyue.qq.com/Upbot.UpbotSrv/VisitWeappUrl?media=2&code=GJlAEmwMhbev4Xj4">
+                                    <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/sq3_wx.png" alt="">
+                                    <span class="contact_name">玩家群</span>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="pt pt06">
+                        <h2 class="tit tit6 bg t">活动规则</h2>
+                        <div class="rule_list">
+                            <p class="wx_show">
+                                1、活动时间：即日起-游戏上线前
+                                <br />2、在本活动中点击【立即预约】预约游戏、填写手机号订阅通知都可获得一次抽奖机会。单用户最多可得2次抽奖机会。
+                                <br />3、填写手机号订阅通知有机会获得测试资格，敬请留意。
+                                <br />4、奖励数量：荣耀水晶（等值2000元红包卡券，1份，0.0001%）；NS游戏机（1份，0.0001%）；传说皮肤卡（等值178.8元红包卡券，1份，0.001%）；188元现金（1份，0.0005%）；星币*10（200万份，99.9983%）。
+                                <br />5、道具、红包将以卡券的形式下发到游戏中心账户中，待游戏上线后通过游戏中心首次下载注册可兑换领取。
+                                <br />6、本活动与Apple Inc.无关
+                            </p>
+                            <p class="qq_show">
+                                1、活动时间：即日起-游戏上线前
+                                <br />2、在本活动中点击【立即预约】预约游戏、填写手机号订阅通知都可获得一次抽奖机会。单用户最多可得2次抽奖机会。
+                                <br />3、填写手机号订阅通知有机会获得测试资格，敬请留意。
+                                <br />4、奖励数量：荣耀水晶（等值2000Q币，1份，0.0001%）；NS游戏机（1份，0.0001%）；传说皮肤卡（等值178.8Q币，1份，0.001%）；188元现金（1份，0.0005%）；星币*10（200万份，99.9983%）。
+                                <br />5、道具、红包将以卡券的形式下发到游戏中心账户中，待游戏上线后通过游戏中心首次下载注册可兑换领取。
+                                <br />6、本活动与Apple Inc.无关
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 弹窗 -->
+
+        <!-- 提示：获奖记录-->
+        <div id="popRecord" class="pop pop-bg3 pop-prize-record">
+            <div class="pop-close sp t pa" onclick="closeDialog()" data-popid="msg">关闭</div>
+            <div class="pop-con">
+                <div class="pop-tit bg"></div>
+                <!-- 无数据 .no-data -->
+                <div class="pop-body ">
+                    <ul class="prize-record-list ">
+                        <li>
+                            <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/prize/g2.png" alt="沧海之曜">
+                            <span class="prize-name">沧海之曜×2</span>
+                        </li>
+                        <!-- 如果是皮肤奖励，则加 prize-skin 样式名 -->
+                        <li class="prize-skin">
+                            <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/prize/g1.png" alt="孙悟空_西部大镖客">
+                            <span class="prize-name">孙悟空 西部大镖客×2</span>
+                            <a href="javascript:;" class="btn_addr bg t"></a>
+                        </li>
+                    </ul>
+                    <div class="icon_down bg t"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 填写实物信息弹窗 TODO -->
+        <div id="milo-personInfo" class="pop  pop_address">
+            <a href="javascript:closeDialog();" class="pop_close1"></a>
+            <div class="milo-form-row" style="line-height: 45px;">
+                <lable class="pop_address_tit bg t">
+                    恭喜您获得以下礼包：
+                    <div id="milo-packageList"></div>
+                </lable>
+            </div>
+            <div class="milo-form-row">
+                <lable class="milo-form-label is-require">收货人</lable>
+                <div class="milo-form-contariner">
+                    <input id="milo-personName" class="milo-form-item" type="text">
+                </div>
+            </div>
+            <div class="milo-form-row">
+                <lable class="milo-form-label is-require">手机号</lable>
+                <div class="milo-form-contariner">
+                    <input id="milo-personMobile" class="milo-form-item" type="text">
+                </div>
+            </div>
+            <div class="milo-form-row">
+                <lable class="milo-form-label is-require">所在地区</lable>
+                <div class="milo-form-contariner">
+                    <select class="milo-form-item" id="milo-province"></select>
+                    <select class="milo-form-item" id="milo-city"></select>
+                    <select class="milo-form-item" id="milo-region"></select>
+                </div>
+            </div>
+
+            <div class="milo-form-row">
+                <lable class="milo-form-label is-require">详细地址</lable>
+                <div class="milo-form-contariner">
+                    <textarea id="milo-personAddress" class="milo-form-item"></textarea>
+                </div>
+            </div>
+            <div class="milo-form-row">
+                <button id="milo-submitPersonInfo" class="btn_submit bt t">提交</button>
+            </div>
+        </div>
+
+        <!-- 恭喜预约成功: -->
+        <div id="popSuccess" class="pop pop1 pop-success">
+            <div class="pop-close sp t pa" onclick="closeDialog()">关闭</div>
+            <div class="pop-con">
+                <div class="pop-tit bg"></div>
+                <div class="pop-body">
+                    <div class="tip_msg"><strong class="bold">订阅通知后</strong>将通过短信第一时间通知你测试信息</div>
+                    <div class="input_phone ">
+                        <label>手机号：</label>
+                        <input type="text" id="mobile">
+                    </div>
+                    <a href="javascript:;" id="submit_mobile" class="btn_book bg t"></a>
+                </div>
+            </div>
+        </div>
+        <!-- 手机号授权 -->
+        <div id="popPhoneAuthor" class="pop pop1 pop-success pop-success2">
+            <div class="pop-close sp t pa" onclick="closeDialog()">关闭</div>
+            <div class="pop-con">
+                <div class="pop-tit bg"></div>
+                <div class="pop-body">
+                    <div class="tip_msg">授权《星之破晓》使用此手机号<br /><span class="txt_yellow">订阅通知</span>后将通过短信第一时间通知你测试信息</div>
+                    <div class="input_phone ">
+                        <label>手机号：</label>
+                        <input type="text" id="mobile2" readonly>
+                    </div>
+                    <a href="javascript:;" class="use_other_phone_num btn_link">使用其他手机号</a>
+
+                    <div class="pop_btns">
+                        <a href="javascript:closeDialog();" ontouchend="easReport('wedo.wedo20240703.reserve.cancel')"
+                            class="btn_refuse bg t">拒绝</a>
+                        <a href="javascript:;" id="popPhoneAuthor-submit"
+                            ontouchend="easReport('wedo.wedo20240703.reserve.confirm')" class="btn_author bg t">授权</a>
+                    </div>
+
+                    <ul class="agree_list">
+                        <!-- 运营商隐私协议：
+                            ——————按钮文案：
+                            电信：《天翼账号提供认证服务与隐私协议》
+                            联通：《联通统一认证服务条款》
+                            移动：《中国移动认证服务条款》
+                            ——————链接：
+                            电信：https://e.189.cn/sdk/agreement/show.do?order=2&type=main&appKey=&hidetop=true&returnUrl=
+                            联通：https://opencloud.wostore.cn/authz/resource/html/disclaimer.html?fromsdk=true
+                            移动：https://wap.cmpassport.com/resources/html/contract.html
+                        -->
+                        <li class="checkbox1"><i class="checkbox"></i>授权即表明同意 <a
+                                href="//game.qq.com/privacy_guide.shtml">产品隐私协议</a> 及
+                            <!--<a href="" id="yysUrl">运营商隐私协议</a> -->
+                            <a href="https://e.189.cn/sdk/agreement/show.do?order=2&type=main&appKey=&hidetop=true&returnUrl="
+                                id="url3" style="display: none;">电信：《天翼账号提供认证服务与隐私协议》</a>
+                            <a href="https://opencloud.wostore.cn/authz/resource/html/disclaimer.html?fromsdk=true"
+                                id="url2" style="display: none;">联通：《联通统一认证服务条款》</a>
+                            <a href="https://wap.cmpassport.com/resources/html/contract.html" id="url1"
+                                style="display: none;">移动：《中国移动认证服务条款》</a>
+                        </li>
+                        <li class="checkbox2"><i class="checkbox"></i>授权同意接受《星之破晓》向我提供的联系方式发放相关调研或活动信息</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 恭喜预约成功 -->
+        <div id="popAuthorConfirm" class="pop pop1 pop-success pop-success3">
+            <div class="pop-close sp t pa" onclick="closeDialog()">关闭</div>
+            <div class="pop-con">
+                <div class="pop-tit bg"></div>
+                <div class="pop-body">
+                    <div class="tip_msg">授权《星之破晓》使用此手机号<br /><span class="txt_yellow">订阅通知</span>后将通过短信第一时间通知你测试信息</div>
+                    <div class="input_phone ani_shansuo">
+                        <label>手机号：</label>
+                        <input type="text" id="mobile3">
+                    </div>
+                    <a href="javascript:;" id="submit_mobile3" class="btn_book bg t"></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 已获得xxxx 道具卡券将下发到游戏中心 -->
+        <div id="pop1" class="pop pop-notify">
+            <div class="pop-close sp t pa" onclick="closeDialog()">关闭</div>
+            <div class="pop-con">
+                <div class="pop-body">
+                    <div class="txt_msg">预约后，游戏上线时会通知你</div>
+                </div>
+                <div class="pop_btns">
+                    <a href="javascript:closeDialog();" class="btn_cancel bg t"></a>
+                    <a href="javascript:closeDialog();" class="btn_reserve_s bg t"></a>
+                </div>
+            </div>
+        </div>
+        <!-- 已获得xxxx 道具卡券将下发到游戏中心 -->
+        <div id="pop2" class="pop pop-msg-get">
+            <div class="pop-close sp t pa" onclick="closeDialog()">关闭</div>
+            <div class="pop-con">
+                <div class="pop-body">
+                    <div class="txt_msg">已获得xxxx<br />
+                        道具卡券将下发到游戏中心</div>
+                </div>
+            </div>
+        </div>
+        <!-- 次数不足，快去预约 -->
+        <div id="pop3" class="pop">
+            <div class="pop-close sp t pa" onclick="closeDialog()">关闭</div>
+            <div class="pop-con">
+                <div class="pop-body">
+                    <div class="txt_msg">抽奖机会不足，<br />
+                        快去预约游戏获得更多抽奖次数吧！</div>
+                </div>
+                <a href="javascript:;" class="btn_reserve_m bg t">立即预约</a>
+            </div>
+        </div>
+        <!-- 次数不足，快去订阅 -->
+        <div id="pop4" class="pop">
+            <div class="pop-close sp t pa" onclick="closeDialog()">关闭</div>
+            <div class="pop-con">
+                <div class="pop-body">
+                    <div class="txt_msg">抽奖机会不足，<br />
+                        快去订阅通知获得更多抽奖次数吧！</div>
+                </div>
+                <a href="javascript:;" class="btn_book_m bg t">立即预约</a>
+            </div>
+        </div>
+        <!-- 预约后，游戏上线时会通知你 -->
+        <div id="pop5" class="pop">
+            <div class="pop-close sp t pa" onclick="closeDialog()">关闭</div>
+            <div class="pop-con">
+                <div class="pop-body">
+                    <div class="txt_msg">预约后，游戏上线时会通知你</div>
+                </div>
+                <a href="javascript:;" class="btn_confirm bg t">立即预约</a>
+            </div>
+        </div>
+        <!-- 预约后，游戏上线时会通知你 -->
+        <div id="pop6" class="pop">
+            <div class="pop-close sp t pa" onclick="closeDialog()">关闭</div>
+            <div class="pop-con">
+                <div class="pop-body">
+                    <div class="txt_msg">预约后，游戏上线时会通知你<br />
+                        并在WiFi环境下自动下载游戏</div>
+                </div>
+                <a href="javascript:closeDialog();" class="btn_confirm bg t">确定</a>
+            </div>
+        </div>
+        <div id="pop7" class="pop pop-notify">
+            <div class="pop-close sp t pa" onclick="closeDialog()">关闭</div>
+            <div class="pop-con">
+                <div class="pop-body">
+                    <div class="txt_msg">预约后，游戏上线时会通知你<br />
+                        并在WiFi环境下自动下载游戏</div>
+                </div>
+                <div class="pop_btns">
+                    <a href="javascript:closeDialog();" class="btn_confirm_blue bg t">确定</a>
+                    <a href="javascript:closeDialog();" class="btn_cancel_yellow bg t">取消</a>
+                </div>
+            </div>
+        </div>
+        <div id="pop8" class="pop pop-notify">
+            <div class="pop-close sp t pa" onclick="closeDialog()">关闭</div>
+            <div class="pop-con">
+                <div class="pop-body">
+                    <div class="txt_msg">预约后，游戏上线时会通知你</div>
+                </div>
+                <div class="pop_btns">
+                    <a href="javascript:closeDialog();" class="btn_confirm_blue bg t">确定</a>
+                    <a href="javascript:closeDialog();" class="btn_cancel_yellow bg t">取消</a>
+                </div>
+            </div>
+        </div>
+        <div id="pop9" class="pop pop-reserve-success-bg" onclick="closeDialog()">
+            <div class="pop-reserve-success-click">
+                <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/pop_reserve_success.png" alt=""
+                    class="reserve_success_img">
+            </div>
+        </div>
+
+        <!-- 通用提示弹窗 -->
+        <div id="popAlert" class="pop pop-bg4 pop-alert">
+            <div class="pop-close sp t pa" onclick="closeDialog('popAlert')">关闭</div>
+            <div class="pop-con">
+                <div class="pop-body">
+                    <div class="J_alert_msg get_msg stroked2">
+                        通用提示
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分享引导弹窗 -->
+        <div id="popGuideShare" class="pop pop-guide">
+            <img src="//game.gtimg.cn/images/wedo/cp/wedo20240703/share_guide.png" alt="分享引导">
+        </div>
+
+        <div class="pop pop-video" id="popVideo">
+            <a href="javascript:hideVideo();" class="pop-close"></a>
+            <div id="video" class="video-box"></div>
+        </div>
+    </div>
+    <script src="//ossweb-img.qq.com/images/js/mobile_bundle/milo.js"></script>
+    <script src="//ossweb-img.qq.com/images/js/mobile_bundle/util/zepto.js"></script>
+    <script src="//gameact.qq.com/comm-htdocs/js/game_area/yxzj_server_select.js"></script>
+    <script type="text/javascript" src="//pub.idqqimg.com/qqmobile/qqapi.js?_bid=152"></script>
+    <script charset="utf-8" src="//game.weixin.qq.com/cgi-bin/h5/static/open/js/opensdk.js"></script>
+    <script src="//pvp.qq.com/cp/a20220506ndj/js/swiper-bundle.min.js"></script>
+    <!-- <script type="text/javascript" src="//game.gtimg.cn/images/js/xom/xom.bundle.js" charset="utf-8" tcss-enable -->
+    <!-- eas-enable beacon-enable beacon-appkey="0WEB01DBSP4NCDKM"></script> -->
+
+    <script src="//game.gtimg.cn/images/js/2018foot/foot.js"></script>
+    <!-- 弹出层方法 -->
+    <!-- <script src="//ossweb-img.qq.com/images/js/milo_bundle/milo.js"></script> -->
+    <script src="//ossweb-img.qq.com/images/js/jquery/jquery-1.11.3.min.js"></script>
+    <script src="//vm.gtimg.cn/tencentvideo/txp/js/txplayer.js"></script>
+    <script src="//game.gtimg.cn/images/js/milo-next/latest/milo.gbk.min.js"></script>
+    <!-- swiper4 -->
+    <!--<script  charset="UTF-8"  src="//game.weixin.qq.com/cgi-bin/h5/static/open/js/opensdk.js"></script>-->
+
+    <!--<script src="https://pub.idqqimg.com/qqmobile/qqapi.js?_bid=2538"></script>-->
+    <!-- <script src="//img.ssl.msdk.qq.com/wiki/msdkJsAdapter.js"></script> -->
+
+    <!-- <script src="//ossweb-img.qq.com/images/js/swiper4_component/js/swiper.min.js"></script> -->
+    <!-- <script charset="utf-8" type="text/javascript" src="//poxiao.qq.com/cp/wedo20240703/js/lay.js"></script> -->
+    <script charset="utf-8" type="text/javascript" src="//ulink.qq.com/ulinksdk/dist/js/ulink.2.0.15.js"></script>
+    <!-- <script type="text/javascript" src="./js/common.js"></script> -->
+    <!--<script src="./js/actCommon.js"></script>-->
+    <!-- <script charset="utf-8" src="./js/act.js"></script> -->
+    <script title="全局变量">
+        let G_DATA = {
+            openid: '' // openid，请在用户登录后赋值，该变量会在上报方法中使用
+        }
+
+        // EAS上报
+        function easReport(e_c, ext2, ext3) {
+            const reportData = {
+                e_c: e_c,
+                uin: '',
+                ext1: '',
+                ext2: ext2,
+                ext3: ext3,
+            }
+            if (G_DATA.openid) reportData.openid = G_DATA.openid
+            if (G_DATA.openid) reportData.ext1 = G_DATA.openid
+            if (EAS) EAS.SendClick(reportData)
+        }
+
+        function playVideo(vid) {
+            var player = new Txplayer({
+                containerId: 'video',
+                vid: vid,
+                width: '100%',
+                height: '100%',
+                autoplay: true
+            });
+        }
+
+        function popVideo(vid) {
+            TGDialogS('popVideo');
+            playVideo(vid);
+        }
+
+        function hideVideo() {
+            var flv_s = document.getElementById("video");
+            if (flv_s) { flv_s.innerHTML = ""; }
+            console.log('hidevideo')
+            closeDialog();
+        }
+    </script>
+    <script title="页面逻辑">
+        // 判断用户当前设备
+        const ua = navigator.userAgent.toLowerCase();
+        // 判断是否在微信内
+        // const isWechat = /micromessenger/i.test(ua);
+        isWechat = function () {
+            return /micromessenger/i.test(ua);
+        }
+        // 判断是否在QQ内
+        // const isQQ = /qq\//i.test(ua);
+        isQQ = function () {
+            return /qq\//i.test(ua);
+        }
+        // 判断是否iOS设备
+        // const isIOS = /iphone|ipad|ipod/i.test(ua);
+        isIOS = function () {
+            return /iphone|ipad|ipod/i.test(ua);
+        }
+        // 判断是否Android设备
+        // const isAndroid = /android/i.test(ua);
+        isAndroid = function () {
+            return /android/i.test(ua);
+        }
+        // 其他浏览器
+        // const isOtherBrowser = !isWechat && !isQQ;
+        const isOtherBrowser = !isWechat() && !isQQ();
+
+        console.log('isWechat-'+isWechat(),'isQQ-'+isQQ(),'isIOS-'+isIOS(),'isAndroid-'+isAndroid(),'isOtherBrowser-'+isOtherBrowser,'---------------------------------++++++++++++++++++++++++++++++')
+        alert('isWechat-'+isWechat()+'------isQQ-'+isQQ()+'------isIOS-'+isIOS()+'------isAndroid-'+isAndroid()+'------isOtherBrowser-'+isOtherBrowser+'---------------------------------------++++++++++++++++++++++++++++++')
+
+        $(function () {
+            $('body')[isWechat() ? 'addClass' : 'removeClass']('is_wx')
+            $('body')[isQQ() ? 'addClass' : 'removeClass']('is_qq')
+            $('body')[!isIOS() ? 'addClass' : 'removeClass']('is_android')
+
+            // 显示六要素:
+            ~((function () {
+                $('.ys_link').attr('href', 'https://game.qq.com/privacy_guide.shtml')
+                $('.qx_link').attr('href', 'https://cftweb.3g.qq.com/privacy/permissions?appid=54281817')
+                $('.yy_link').attr('href', 'https://game.weixin.qq.com/cgi-bin/h5/static/circlecenter/mixed_circle.html?tabid=7&appid=wx41b4f1ab5d710dd0&ssid=46#wechat_redirect')
+                // QQ不显示功能
+                if (isQQ()) {
+                    $('.top').show()
+                    $('.page-wrap').css({ 'margin-top': '0.46rem' })
+                    $('.yy_ver').text('1.210.105.0')
+                    $('.yy_link').remove()
+                }
+                // 微信-安卓显示
+                if ((isWechat() && !isIOS())) {
+                    $('.page-wrap').css({ 'margin-top': '0.46rem' })
+                    $('.top').show()
+                    $('.yy_ver').text('1.210.105.0')
+                }
+
+                console.log('[微信QQ都显示，QQ不显示功能链接]', isWechat() && !isIOS())
+            })());
+
+
+            $(document).ready(function () {
+
+                // 试玩按钮跳转链接
+                $('.btn_play').attr('href', isWechat() ? 'https://game.weixin.qq.com/cgi-bin/h5/static/gamecenter/opencloudgame.html?data=%7B%22url%22%3A%22https%3A%2F%2Fm.gamer.qq.com%2Fv2%2Fgame%2Fhy59zf3nyi2kzh98%3Fsid%3Dcp2nia99a8o73ss2a5n0%26channel_tag%3Dwxgame0Fch001%26reserve%3Dtrue%22%2C%22appid%22%3A%22wx41b4f1ab5d710dd0%22%7D' : 'https://m.gamer.qq.com/v2/game/hy59zf3nyi2kzh98?qqsid=cp2nia99a8o73ss2a5n0&channel_tag=qqgamecenter0Fch0001&reserve=true&_wv=137216&_fv=5')
+
+                // TGDialogS('popGetCard')
+                // popAlert('通用提示内容，自定义内容')
+
+                go()
+                easReport('wedo.wedo20240703.page.expose')
+
+
+
+                var mySwiper = new Swiper('#mySwiper', {
+                    disableOnInteraction: false,
+                    loop: true,
+                    autoplay: {
+                        disableOnInteraction: false,
+                    },
+                    slidesPerView: 3,
+                    // centeredSlides: true,
+                    // spaceBetween: 30,
+                    navigation: {
+                        nextEl: '.btn_next',
+                        prevEl: '.btn_prev',
+                    },
+                });
+
+                $('.input_phone input').on('click', function () {
+                    console.log('focus')
+                    $('.input_phone').removeClass('ani_shansuo')
+                })
+
+                $('.agree_list li').on('click', function () {
+                    $(this)[$(this).hasClass('on') ? 'removeClass' : 'addClass']('on')
+                })
+
+                $('.btn_video').click(function () {
+                    const vid = $(this).data('vid')
+                })
+
+                // 点击分享引导弹窗关闭弹窗
+                $('.pop-guide').click(function () {
+                    TGDialogS('popGuide')
+                })
+            })
+        })
+    </script>
+    <!--<script src="//game.gtimg.cn/images/ulink/ulinksdk/vconsole.min.js"></script>-->
+    <script charset="utf-8" src="./js/index.js?v=1.1.3"></script>
+    <script>
+        // new VConsole();
+    </script>
+    <script src="//ossweb-img.qq.com/images/js/TGMobileShare/TGMobileShare.min.js"></script>
+    <script src="//ossweb-img.qq.com/images/js/PTT/ping_tcss_tgideas_https_min.js"></script>
+    <script>
+        TGMobileShare({
+            shareTitle: '预约王者新游抢限号不删档资格', //不设置或设置为空时，页面有title，则调取title
+            shareDesc: '预约即可抢限号不删档资格，更有限量周边、千元大奖等你抽！', //不设置或设置为空时，页面有Description，则调取Description
+            shareImgUrl: 'https://game.gtimg.cn/images/wedo/cp/wedo20240703/share.png', //分享图片尺寸200*200，且填写绝对路径
+            shareLink: '', //分享链接要跟当前页面同域名(手Q分享有这个要求) ,不设置或设置为空时，默认调取当前URL
+            actName: 'wedo20240703' //点击流命名，用于统计分享量，专题一般采用目录名称如a20151029demo
+        });
+        //此段代码不能放到外链JS中，
+        var setSite = { //设置网站属性
+            siteType: "wedo20240703", //必填项:"os"代表是官网，如果不是，则填写actName例如a20160701xxx
+            pageType: "index", //必填项:本页面的定位；按照页面含义填写例如main||list||detail||download||share||page1||pageN,不支持点(.)、下划线(_)
+            pageName: "首页", //必填项:页面中文名
+            osact: '0' //选填项:默认是0。osact=0表示非官网专题；osact=pc表示pc官网/pc官网专题；osact=m表示移动官网/移动官网专题；osact=ingame表示微社区/微社区专题
+        };
+        if (typeof (pgvMain) == 'function') pgvMain();//千万不能忘记！
+    </script>
+</body>
+
+</html>
