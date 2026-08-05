@@ -228,24 +228,7 @@ li{list-style: none;}
 .pop5 .pop_login a.pop_qqbtn{background:url(/ossweb-img/pop/qq_ico.png) no-repeat;background-size: 100% 100%;}
 .pop5 .pop_login a.pop_wxbtn{background:url(/ossweb-img/pop/wx_ico.png) no-repeat;background-size: 100% 100%;}
 
-
-
-
 img{display: none !important;width: 0 !important;height: 0 !important;}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     </style>
     <script>
@@ -757,11 +740,8 @@ img{display: none !important;width: 0 !important;height: 0 !important;}
     <script src="//ossweb-img.qq.com/images/js/jquery/jquery-1.11.3.min.js"></script>
     <script src="//ossweb-img.qq.com/images/js/milo_bundle/milo.js"></script>
     <script src="//game.gtimg.cn/images/js/2018foot/foot.js"></script>
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/swiper-bundle.js"></script>
-    <script src="js/index.js"></script>
     <script>
-$(function () {
+	$(function () {
     //队伍信息
     var teamData = {};
     $('#teamPool .pool_item').each(function () {
@@ -780,7 +760,7 @@ $(function () {
         return teamData[teamId] || null;
     }
 
-    // 根据槽位 ID 获取 jQuery 元素 
+    // 根据槽位 ID 获取元素 
     function getSlotElement(slotId) {
         return $('#eliminate_box').find('[data-slot="' + slotId + '"]');
     }
@@ -788,17 +768,6 @@ $(function () {
     // 获取槽位中已放置的队伍 ID 
     function getTeamIdInSlot(slotId) {
         return getSlotElement(slotId).attr('data-teamid') || '';
-    }
-
-    // Toast 轻提示（2秒后自动消失） 
-    function showToast(message) {
-        $('.toast_msg').remove();
-        var toastElement = $('<div class="toast_msg">' + message + '</div>');
-        $('body').append(toastElement);
-        setTimeout(function () {
-            toastElement.css('animation', 'toastOut 0.3s ease-in forwards');
-            setTimeout(function () { toastElement.remove(); }, 300);
-        }, 2000);
     }
 
     // 渲染单个槽位（填入队伍或清空）
@@ -821,14 +790,14 @@ $(function () {
         }
     }
 
-    // 将队伍放置到指定槽位，自动处理覆盖与来源清空 
+    // 将队伍放置到指定槽位，自动处理覆盖与清空 
     function placeTeam(slotId, team, sourceSlotId) {
-        // 目标槽已有队伍且不同 → 先清空
+        // 目标槽已有队伍且不同  先清空
         var existingTeamId = getTeamIdInSlot(slotId);
         if (existingTeamId && existingTeamId !== team.id) {
             renderSlot(slotId, null);
         }
-        // 来源槽位非目标 → 清空来源
+        // 来源槽位非目标  清空
         if (sourceSlotId && sourceSlotId !== slotId) {
             renderSlot(sourceSlotId, null);
         }
@@ -843,13 +812,16 @@ $(function () {
     // 拖拽状态
     var dragState = {
         isActive: false,
-        team: null, // 被拖拽的队伍数据
-        source: null, // 'pool' 或来源槽位 ID
-        cloneElement: null, // 跟随鼠标的克隆 DOM
-        hoverSlot: null // 当前悬停的槽位
+        team: null,          // 被拖拽的队伍数据
+        source: null,        // 'pool' 或来源槽位 ID
+        cloneElement: null,  // 跟随鼠标的克隆 DOM
+        hoverSlot: null,     // 当前悬停的槽位
+        startX: 0,
+        startY: 0,
+        hasMoved: false      // 是否发生了有效移动
     };
 
-    //克隆元素管理
+    // 克隆元素管理
     function createClone(team, x, y) {
         var cloneHtml =
             '<div class="drag_clone">' +
@@ -887,7 +859,7 @@ $(function () {
         }
     }
 
-    // 根据鼠标坐标查找最近的槽位（需在矩形范围内
+    // 根据鼠标坐标查找最近的槽位（需在矩形范围内）
     function findSlotByPosition(x, y) {
         var bestSlot = null;
         var bestDistance = Infinity;
@@ -922,10 +894,13 @@ $(function () {
         return { x: touch.clientX, y: touch.clientY };
     }
 
-    // 拖拽事件处理器
+    // 拖拽事件处理
     function onDragStart(event, source, team, slotId) {
         if (dragState.isActive) return;
         var position = getEventPosition(event);
+        dragState.startX = position.x;
+        dragState.startY = position.y;
+        dragState.hasMoved = false;   // 重置移动标志
         dragState.isActive = true;
         dragState.team = team;
         dragState.source = source;
@@ -942,6 +917,14 @@ $(function () {
         if (!dragState.isActive) return;
         var position = getEventPosition(event);
         moveClone(position.x, position.y);
+
+        // 计算移动距离，超过阈值则标记已移动
+        var dx = position.x - dragState.startX;
+        var dy = position.y - dragState.startY;
+        if (Math.sqrt(dx * dx + dy * dy) > 10) { // 10px 阈值，防误触与灵敏度
+            dragState.hasMoved = true;
+        }
+
         var hoveredSlot = findSlotByPosition(position.x, position.y);
         dragState.hoverSlot = hoveredSlot;
         highlightSlot(hoveredSlot);
@@ -950,13 +933,28 @@ $(function () {
 
     function onDragEnd(event) {
         if (!dragState.isActive) return;
+
+        // 如果没有有效移动，仅清理并退出，不执行放置
+        if (!dragState.hasMoved) {
+            clearHighlights();
+            removeClone();
+            // 完整重置状态
+            dragState.isActive = false;
+            dragState.team = null;
+            dragState.source = null;
+            dragState.hoverSlot = null;
+            $('#teamPool .pool_item.dragging').removeClass('dragging');
+            event.preventDefault();
+            return;
+        }
+
         var position = getEventPosition(event);
         var targetSlot = findSlotByPosition(position.x, position.y);
 
         if (targetSlot && targetSlot.length) {
             var targetSlotId = targetSlot.attr('data-slot');
             var sourceSlotId = (dragState.source !== 'pool') ? dragState.source : null;
-            // 防止拖拽到自身来源（无意义操作）
+            // 防止拖拽到自身来源
             if (!(sourceSlotId && sourceSlotId === targetSlotId)) {
                 placeTeam(targetSlotId, dragState.team, sourceSlotId);
             }
@@ -980,7 +978,7 @@ $(function () {
         if (team) onDragStart(event, 'pool', team);
     });
 
-    //槽位拖拽（仅已放置的队伍） 
+    // 槽位拖拽（仅已放置的队伍） 
     $('#eliminate_box').on('mousedown touchstart', '.team_li.placed', function (event) {
         var slotElement = $(this);
         var slotId = slotElement.attr('data-slot');
@@ -990,7 +988,7 @@ $(function () {
         if (team) onDragStart(event, slotId, team, slotId);
     });
 
-    //全局移动事件
+    // 全局移动事件
     $(document).on('mousemove touchmove', onDragMove);
     $(document).on('mouseup touchend touchcancel', onDragEnd);
 
@@ -1087,21 +1085,11 @@ $(window).trigger('scroll');
 // 小组赛logo点击
 $('.group_box').on('click', '.team_logo', function (e) {
     var $groupItem = $(this).closest('.group_item');
-    $groupItem.toggleClass('on');  
+    $groupItem.toggleClass('on');
 });
 
 
-
-
-
-
-
-
-
-
-</script>
-    <!-- <script src="js/project.js"></script> -->
-    <!-- <script src="js/comm.js"></script> -->
+	</script>
 </body>
 
 </html>
